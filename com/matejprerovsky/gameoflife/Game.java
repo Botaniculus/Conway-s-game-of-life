@@ -1,5 +1,6 @@
 package com.matejprerovsky.gameoflife;
 
+import java.util.Random;
 
 public class Game {
 	// make it GUI
@@ -12,8 +13,8 @@ public class Game {
 	private static char[][] canvas;
 	public static void main(String[] args) {
 		canvas = new char[VERTICAL][HORIZONTAL];
-		fillCanvas();
-		
+		randomizeCanvas();
+		/*
 		canvas[3][3] = LIVE_CELL;
 		canvas[3][4] = LIVE_CELL;
 		
@@ -26,7 +27,7 @@ public class Game {
 		
 		canvas[6][6] = LIVE_CELL;
 		canvas[6][7] = LIVE_CELL;
-		
+		*/
 		
 		System.out.println("Generation 0");
 		System.out.println(printCanvas());
@@ -43,8 +44,18 @@ public class Game {
 		}
 		
 	}
-		
-	public static void fillCanvas() {
+	
+	public static void randomizeCanvas() {
+		Random random = new Random();
+		for(int i=0; i<VERTICAL; i++) {
+			for(int j=0; j<HORIZONTAL; j++) {
+				int r = random.nextInt(4);
+				canvas[i][j] = (r==0) ? LIVE_CELL : DEAD_CELL;
+			}
+		}
+	}
+	
+	public static void clearCanvas() {
 		for(int i=0; i<VERTICAL; i++) {
 			for(int j=0; j<HORIZONTAL; j++) {
 				canvas[i][j] = DEAD_CELL;
