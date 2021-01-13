@@ -1,8 +1,5 @@
 package com.matejprerovsky.gameoflife;
 
-import java.util.Arrays;
-
-import com.sun.corba.se.spi.extension.CopyObjectPolicy;
 
 public class Game {
 	// make it GUI
@@ -67,33 +64,14 @@ public class Game {
 	
 	public static int neighborsCount(int x, int y) {
 		int count = 0;
-		
-		try {
-			count+=(canvas[y-1][x-1] == LIVE_CELL) ? 1 : 0;
-		} catch (ArrayIndexOutOfBoundsException e) {}
-		try {
-			count+=(canvas[y-1][x] == LIVE_CELL) ? 1 : 0;
-		} catch (ArrayIndexOutOfBoundsException e) {}
-		try {
-			count+=(canvas[y-1][x+1] == LIVE_CELL) ? 1 : 0;
-		} catch (ArrayIndexOutOfBoundsException e) {}
-		try {
-			count+=(canvas[y][x-1] == LIVE_CELL) ? 1 : 0;
-		} catch (ArrayIndexOutOfBoundsException e) {}
-		try {
-			count+=(canvas[y][x+1] == LIVE_CELL) ? 1 : 0;
-		} catch (ArrayIndexOutOfBoundsException e) {}
-		try {
-			count+=(canvas[y+1][x-1] == LIVE_CELL) ? 1 : 0;
-		} catch (ArrayIndexOutOfBoundsException e) {}
-		try {
-			count+=(canvas[y+1][x] == LIVE_CELL) ? 1 : 0;
-		} catch (ArrayIndexOutOfBoundsException e) {}
-		try {
-			count+=(canvas[y+1][x+1] == LIVE_CELL) ? 1 : 0;	
-		} catch (ArrayIndexOutOfBoundsException e) {}
-		
-		
+		for(int i=y-1; i<=y+1; i++) {
+			for(int j=x-1; j<=x+1; j++) {
+				if(i==y && j==x) continue;
+				try {
+					count+=(canvas[i][j] == LIVE_CELL) ? 1 : 0;
+				} catch (ArrayIndexOutOfBoundsException e) {}
+			}
+		}
 		return count;
 	}
 	
